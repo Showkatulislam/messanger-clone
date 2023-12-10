@@ -4,7 +4,7 @@ import prisma from '@/lib/prismadb';
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from 'bcrypt'
 
-const authOptions:AuthOptions={
+export const authOptions:AuthOptions={
     adapter:PrismaAdapter(prisma),
     providers:[
         CredentialsProvider({
@@ -53,4 +53,4 @@ const authOptions:AuthOptions={
 
 const handler=NextAuth(authOptions);
 
-export { handler as GET, handler as POST, authOptions }
+export { handler as GET, handler as POST };
