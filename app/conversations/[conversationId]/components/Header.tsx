@@ -23,7 +23,7 @@ const Header:React.FC<HeaderProps> = ({conversation}) => {
 
   const statusText=useMemo(()=>{
     return isActive?'Active':'offline';
-  },[conversation,isActive])
+  },[isActive])
 
   return (
     <>
