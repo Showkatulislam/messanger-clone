@@ -35,7 +35,7 @@ const ConversationModel: React.FC<modelProps> = ({
     toast.error("Delete Fail..")
    })
   
-  }, [router,conversationId])
+  }, [router,conversationId,closeModal])
 
   return (
     <div>

@@ -27,7 +27,7 @@ const useRouter = () => {
             icon:HiArrowLeftOnRectangle,
             onClick:()=>signOut(),
         }
-    ],[])
+    ],[pathname])
     return routes
 };
 
