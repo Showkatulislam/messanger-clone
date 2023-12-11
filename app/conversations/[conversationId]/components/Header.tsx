@@ -5,8 +5,8 @@ import Link from "next/link";
 import { HiArrowLeft, HiDotsHorizontal } from "react-icons/hi";
 import ConversationModel from "./ConversationModel";
 import useOtherUser from "@/app/hooks/useOtherUser";
-import { Conversation, User } from "@prisma/client";
 import useActiveList from "@/app/hooks/useActiveList";
+import AvatarGroup from "@/app/components/AvatarGroup";
 
 interface HeaderProps {
   conversation:any
@@ -58,7 +58,11 @@ const Header:React.FC<HeaderProps> = ({conversation}) => {
             <HiArrowLeft size={22} />
           </Link>
           <div className="flex items-center gap-x-3">
-            <Avatar user={otherUser} />
+          {conversation?.isGroup ? (
+          <AvatarGroup users={conversation.users} />
+        ) : (
+          <Avatar user={otherUser} />
+        )}
             <div>
               <p className="text-base text-gray-700 font-medium">{conversation.name ||otherUser.name}</p>
               <span className="text-sm">

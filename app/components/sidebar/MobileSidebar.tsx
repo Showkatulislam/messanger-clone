@@ -12,7 +12,7 @@ const MobileSidebar = () => {
           `lg:hidden
           fixed
           left-0
-          bottom-3
+          bottom-0
           z-10
           bg-gray-200
           w-full

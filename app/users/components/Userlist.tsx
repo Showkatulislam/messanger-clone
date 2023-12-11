@@ -16,7 +16,7 @@ const Userlist:React.FC<userlistProps> = ({users}) => {
      overflow-y-auto
      lg:w-80">
       <div className="">
-        <p className="font-semibold text-2xl lg:px-3 py-2 px-5">People</p>
+        <p className="font-semibold text-2xl lg:px-3 py-2 px-5 mb-6">People</p>
       </div>
       <div className="flex flex-col gap-y-4 overflow-y-auto">
         {users.map((user) => (

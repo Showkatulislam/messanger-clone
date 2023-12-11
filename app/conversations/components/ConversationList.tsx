@@ -3,20 +3,29 @@ import clsx from "clsx";
 import ConversationBox from "./ConversationBox";
 import useConversations from "@/app/hooks/useConversations";
 import { FullConversationType } from "@/app/types";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
 import { pusherClient } from "@/lib/pusher";
 import { find } from "lodash";
 import { useRouter } from "next/navigation";
+import { HiUserGroup } from "react-icons/hi";
+import GroupModel from "./GroupModel";
+import { User } from "@prisma/client";
 interface conversationlistProps{
-  initailItems:FullConversationType[]
+  initailItems:FullConversationType[],
+  users:User[]
 }
 
-const ConversationList:React.FC<conversationlistProps> = ({initailItems}) => {
+const ConversationList:React.FC<conversationlistProps> = ({initailItems,users}) => {
     const [conversations,setConversations]=useState(initailItems)
     const {isOpen,conversationId}=useConversations()
+    const [openGroupModal,setOpenGroupModal]=useState(false)
     const session=useSession()
     const router=useRouter()
+
+    const handleGroupModal=useCallback(()=>{
+      setOpenGroupModal(false);
+    },[])
 
     const pusherKey=useMemo(()=>{
       return session.data?.user?.email
@@ -70,9 +79,11 @@ const ConversationList:React.FC<conversationlistProps> = ({initailItems}) => {
     },[pusherKey,conversationId,router])
 
   return (
-    <div
+    <>
+    <GroupModel users={users} isOpen={openGroupModal} closeModal={handleGroupModal}/>
+        <div
       className={clsx(`fixed 
-      inset-y-0 
+      inset-y-0
       pb-20
       lg:pb-0
       lg:left-20 
@@ -85,7 +96,12 @@ const ConversationList:React.FC<conversationlistProps> = ({initailItems}) => {
       block w-full left-0`,
       isOpen?"hidden":"w-full block left-0")}
     >
+      <div className="flex justify-between items-center px-2">
       <p className="text-2xl py-3 font-semibold">Messages</p>
+      <div role="button" onClick={()=>setOpenGroupModal(true)}>
+        <HiUserGroup/>
+      </div>
+      </div>
 
       <div>
         {
@@ -95,6 +111,7 @@ const ConversationList:React.FC<conversationlistProps> = ({initailItems}) => {
         }
       </div>
     </div>
+    </>
   );
 };
 
