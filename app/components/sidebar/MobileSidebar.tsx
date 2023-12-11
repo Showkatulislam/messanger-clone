@@ -24,7 +24,7 @@ const MobileSidebar = () => {
             <div className="flex justify-between items-center">
             {
                router.map((route)=>(
-                <MobileSiderbarItem icon={route.icon} href={route.href} label={route.label} key={route.label}></MobileSiderbarItem>
+                <MobileSiderbarItem icon={route.icon} href={route.href} label={route.label} key={route.label} onClick={route.onClick}></MobileSiderbarItem>
                )) 
             }
             </div>
