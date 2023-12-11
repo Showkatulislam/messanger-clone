@@ -13,8 +13,13 @@ const MobileSiderbarItem:React.FC<desktopItemProps> = ({
     href,
     active
 }) => {
+    const handleClick=()=>{
+        if(onClick){
+            return onClick()
+        }
+    }
     return (
-        <div>
+        <div role='button' onClick={handleClick}>
             <Link href={href}>
              <Icon size={24}/>
             </Link>
