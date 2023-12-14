@@ -64,7 +64,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
     return "New Conversation Start";
   }, [lastMessage]);
 
-  const handleClick= (() => {
+  const handleClick= useCallback(() => {
     router.push(`/conversations/${conversation.id}`);
   },[conversation,router])
 
