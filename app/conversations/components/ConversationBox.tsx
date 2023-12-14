@@ -64,9 +64,9 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
     return "New Conversation Start";
   }, [lastMessage]);
 
-  const handleClick () => {
+  const handleClick= (() => {
     router.push(`/conversations/${conversation.id}`);
-  };
+  },[conversation,router])
 
   return (
     <>
@@ -91,22 +91,23 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
         p-3`,
           selected && "bg-gray-100"
         )}
+        onClick={handleClick}
       >
         {conversation?.isGroup ? (
           <AvatarGroup users={conversation.users} />
         ) : (
           <Avatar user={otherUser} />
         )}
-        <div className=" flex flex-col w-full">
+        <div className=" flex flex-col w-full" >
           <div className="flex justify-between">
-            <div className="flex gap-3 " onClick={handleClick}>
+            <div className="flex gap-3 " >
               <p className="text-base text-gray-900">
                 {conversation.name || otherUser.name}
               </p>
             </div>
-            <div role="button" onClick={() => setIsOpen(true)}>
+{  /*         <div role="button" onClick={() => setIsOpen(true)}>
               <HiDotsHorizontal className="ml-5" size={22} />
-            </div>
+        </div>*/}
           </div>
 
           <div className="flex justify-between w-ful  items-center">
