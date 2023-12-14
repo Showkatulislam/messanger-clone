@@ -9,6 +9,8 @@ interface userlistProps{
 const Userlist:React.FC<userlistProps> = ({users}) => {
   return (
     <div className="fixed
+     pb-12
+     lg:pb-0
      inset-y-0
      lg:border-r
      w-full 
